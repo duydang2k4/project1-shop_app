@@ -2,7 +2,9 @@ package com.project.courseapp.Controller;
 
 import com.project.courseapp.dtos.UserDTO;
 import com.project.courseapp.dtos.UserLoginDTO;
+import com.project.courseapp.services.iUserService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -15,7 +17,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("${api.prefix}/users")
+@RequiredArgsConstructor
 public class UserController {
+    private final iUserService userService;
+
     @PostMapping("/register")
     public ResponseEntity<?> creatUser(@Valid @RequestBody UserDTO userDTO, BindingResult result){
         try{
@@ -26,6 +31,7 @@ public class UserController {
             if(!userDTO.getPassword().equals(userDTO.getRetypePassword())){
                 return ResponseEntity.badRequest().body("Passwords do not match");
             }
+            userService.creatUser(userDTO);
             return ResponseEntity.ok("Register successfully");
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -33,10 +39,7 @@ public class UserController {
     }
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@Valid @RequestBody UserLoginDTO userLoginDTO){
-        try{
-            return ResponseEntity.ok("Some token");
-        } catch (Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        String token = userService.login(userLoginDTO.getPhonenumber(), userLoginDTO.getPassword());
+        return ResponseEntity.ok(token);
     }
 }
