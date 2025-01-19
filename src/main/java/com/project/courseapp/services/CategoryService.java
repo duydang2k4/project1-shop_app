@@ -5,6 +5,7 @@ import com.project.courseapp.models.Category;
 import com.project.courseapp.repositories.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
@@ -12,6 +13,7 @@ import java.util.List;
 public class CategoryService implements iCategoryService{
     private final CategoryRepository categoryRepository;
     @Override
+    @Transactional
     public Category createCategory(CategoryDTO categoryDTO) {
         Category newCategory = Category.builder().name(categoryDTO.getName()).build();
         return categoryRepository.save(newCategory);
@@ -28,6 +30,7 @@ public class CategoryService implements iCategoryService{
     }
 
     @Override
+    @Transactional
     public Category updateCategory(long categoryId, CategoryDTO categoryDTO) {
         Category existingCategory = getCategoryById(categoryId);
         existingCategory.setName(categoryDTO.getName());
@@ -35,6 +38,7 @@ public class CategoryService implements iCategoryService{
     }
 
     @Override
+    @Transactional
     public void deleteCategory(long id) {
         categoryRepository.deleteById(id);
     }

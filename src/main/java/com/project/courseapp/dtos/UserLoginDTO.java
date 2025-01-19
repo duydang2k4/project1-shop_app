@@ -14,4 +14,6 @@ public class UserLoginDTO {
 
     @NotBlank(message = "Required")
     private String password;
+
+    private Long role;
 }

@@ -22,7 +22,8 @@ public class CategoryController {
     public ResponseEntity<?> createCategory(@Valid @RequestBody CategoryDTO categoryDTO, BindingResult result) {
         try {
             if (result.hasErrors()) {
-                List<String> errorMessages = result.getFieldErrors().stream().map(FieldError::getDefaultMessage).toList();
+                List<String> errorMessages = result.getFieldErrors().stream()
+                        .map(FieldError::getDefaultMessage).toList();
                 return ResponseEntity.badRequest().body(errorMessages);
             }
             categoryService.createCategory(categoryDTO);

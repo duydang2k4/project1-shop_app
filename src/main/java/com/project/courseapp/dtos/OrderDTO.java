@@ -21,9 +21,11 @@ public class OrderDTO {
     private String email;
 
     @NotBlank(message = "Phone number is required")
-    @Size(min = 10, message = "It is not a phone number")
+    @Size(min = 5, message = "It is not a phone number")
     @JsonProperty("phone_number")
     private String phonenumber;
+
+    private String status;
 
     @Min(value = 0, message = "Total money must be >= 0")
     private Float total_money;

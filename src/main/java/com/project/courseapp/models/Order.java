@@ -1,13 +1,8 @@
 package com.project.courseapp.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Date;
 
 @Entity
 @Table(name = "orders")
@@ -19,11 +14,11 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long orderId;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private User userId;
 
     @Column(name = "fullname", length = 100)
     private String fullName;
@@ -34,11 +29,11 @@ public class Order {
     @Column(name = "phone_number",nullable = false, length = 100)
     private String phoneNumber;
 
-    @Column(name="order_date")
-    private LocalDateTime orderDate;
-
     @Column(name = "status")
     private String status;
+
+    @Column(name="order_date")
+    private Date orderDate;
 
     @Column(name = "total_money")
     private Float totalMoney;

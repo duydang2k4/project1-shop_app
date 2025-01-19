@@ -16,13 +16,13 @@ public class ProductDTO {
     private String name;
 
     @Min(value = 0, message = "giá phải >0")
-    private Long price;
+    private Float price;
 
     private String thumbnail;
 
     private String description;
 
-    private Integer category_id;
+    private Long category_id;
 
     private MultipartFile file;
 
