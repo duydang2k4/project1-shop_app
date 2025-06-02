@@ -1,0 +1,36 @@
+<app-header></app-header>
+<div class="container">
+    <!-- <div class="intro-section">
+        <h1>Đây là trang Home</h1>
+        <p>Trang này hiển thị danh sách các sản phẩm, kèm ảnh</p>
+        <p>Các bạn có thể chọn xem sản phẩm và mua sản phẩm tại đây</p>
+        <img src="https://png.pngtree.com/thumb_back/fw800/background/20240103/pngtree-vector-texture-online-sales-shopping-marketing-banner-image_13896243.png" alt="">
+    </div> -->
+    <!--Đoạn này có 1 ô searchbox bên trái, 1 combobox bên phải  -->
+    <div class="search-box">
+        <input type="text" class="form-control search-input" placeholder="Tìm sản phẩm" (input)="onSearchInput($event)">
+        <select class="form-control product-category" (change)="onCategoryChange($event)">
+            <option selected disabled>Danh mục sản phẩm</option>
+            <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>    
+        </select>
+    </div>
+    <div class="row">        
+        <div class="col-lg-4 col-md-6" *ngFor="let product of products">
+            <div class="product-item" >
+                <img 
+                    [src]="product.thumbnail"
+                    alt="Product Image" 
+                    class="product-image">
+                <h3 class="product-name">{{ product.name }}</h3>
+                <p class="product-description">{{ product.description }}</p>
+                <p class="product-warranty">{{ product.categoryId.name }}</p>
+                <p class="product-price">Giá: {{ product.price | currency }}</p>
+                <div class="product-actions">
+                    <button class="btn btn-primary" (click)="addToCart(product)" name="product">Thêm vào giỏ hàng</button>                    
+                    <span class="space-x"></span>
+                    <button class="btn btn-success" (click)="addToCart2(product)" name="product" href>Mua ngay</button>
+                </div>
+            </div>    
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+<app-header></app-header>
+<div class="container">
+    <div class="intro-section">
+        <h1>GIỎ HÀNG</h1>
+    </div>    
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="product-header">Thông tin người nhận</h2>
+            <form>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Họ và tên</label>
+                    <input type="text" class="form-control" [(ngModel)]="orderInfo.fullname" name="fullname" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" [(ngModel)]="orderInfo.email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Số điện thoại</label>
+                    <input type="text" class="form-control" [(ngModel)]="orderInfo.phone_number" name="phone" required>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phương thức thanh toán</label>
+                    <input type="text" class="form-control" [(ngModel)]="orderInfo.payment_method" name="paymentMethod" required>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h2 class="product-order">Sản phẩm đã đặt hàng</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-start">Sản phẩm</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Đơn giá</th>
+                        <th scope="col">Tổng giá</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of cartItems">
+                        <td >
+                            <div class="product-info" >
+                                <img [src]="item.thumbnail"
+                                    alt="Product Image" class="product-image">
+                                <span class="product-name">{{ item.name }}</span>
+                            </div>
+                        </td>
+                        <td>{{ item.quantity }}</td>
+                        <td>${{ item.price}}</td>
+                        <td>${{ item.price * item.quantity}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-start mt-3">
+                <h4 class="header-text text-end ">Tổng giá: ${{ getTotalPrice() }}</h4>
+            </div>
+            <div class="text-start mt-3">
+                <button class="btn btn-gradient" type="button" (click)="checkout()">Đặt hàng</button>
+                <button class="btn btn-danger" (click)="clearCart()">Xóa giỏ hàng</button>
+            </div>
+        </div>
+    </div>    
+</div>
